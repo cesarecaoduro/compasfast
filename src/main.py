@@ -19,6 +19,3 @@ async def getPoint():
 async def getFrame():
     point = frame = Frame.worldXY()
     return {"message": "Frame: {}".format(frame.to_jsonstring())}    
-
-if __name__ == '__main__':
-    uvicorn.run(app, port=8000, host="0.0.0.0")

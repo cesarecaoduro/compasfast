@@ -1,11 +1,13 @@
 FROM python:3.9.6
 
-WORKDIR /fastcompas-app
+WORKDIR /code
 
-COPY requirements.txt .
+COPY ./requirements.txt /code/requirements.txt
 
 RUN pip install cython --install-option="--no-cython-compile"
 RUN pip install COMPAS
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-COPY ./src ./app
+COPY ./src /code/app
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
